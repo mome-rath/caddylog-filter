@@ -13,6 +13,15 @@ ts_ten_hours_ago=$(( ts_now - 36000 ))
 ./readlogs "@$ts_ten_hours_ago" "@$ts_now" /var/log/caddy/*.log
 ```
 
+Or, if you are using multiple log files for multiple hosts and want to find out which one has most traffic:
+
+```bash
+for log in /var/log/caddy/*.log; do
+  [ $(basename "$log")" = "caddy.log" ] && continue # Skip caddy.log
+  echo "$(basename "$log"): $(sudo readlogs '5 minutes ago' 'now' "$log" | wc -l)"
+done
+```
+
 ## Prerequisites
 
 You need to have `jq` installed and avalable via the `jq` command as the lines will be parsed with this tool.
