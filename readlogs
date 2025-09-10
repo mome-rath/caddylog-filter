@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+show_help() {
+    local script_name;
+    script_name="$(basename -- "$0")"
+    echo -e "\e[34mUsage:\e[0m $script_name <start_date> <end_date> <log_file1> [<log_file2> ... <log_fileN>]" >&2
+    echo -e "\e[34mExample:\e[0m $script_name '2023-10-01 00:00:00' '2023-10-31 23:59:59' /var/log/caddy/*.log" >&2
+}
+
 # Convert date string to seconds since epoch
 convert_date() {
     date -d "$1" +%s 2>/dev/null
@@ -72,10 +79,7 @@ read_logs() {
 
 # Main script execution
 if [[ $# -lt 3 ]]; then
-    local script_name;
-    script_name="$(basename -- "$0")"
-    echo -e "\e[34mUsage:\e[0m $script_name <start_date> <end_date> <log_file1> [<log_file2> ... <log_fileN>]" >&2
-    echo -e "\e[34mExample:\e[0m $script_name '2023-10-01 00:00:00' '2023-10-31 23:59:59' /var/log/caddy/*.log" >&2
+    show_help
     exit 1
 fi
 
