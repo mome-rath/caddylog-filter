@@ -24,7 +24,7 @@ done
 
 ## Prerequisites
 
-You need to have `jq` installed and avalable via the `jq` command as the lines will be parsed with this tool.
+You need to have `jq` installed and available via the `jq` command as the lines will be parsed with this tool.
 
 ## Log File Format
 
